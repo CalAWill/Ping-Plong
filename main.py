@@ -4,6 +4,7 @@ import time
 
 pygame.init()  # Initialises pygame
 
+
 def ping():
     # Player code
     playerImg = pygame.image.load("pingLeft96.png")
@@ -54,16 +55,16 @@ def ping():
     while pingRunning:
         screen.fill((0, 0, 0))
         # Checks for inputs
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+        for gameEvent in pygame.event.get():
+            if gameEvent.type == pygame.QUIT:
                 pingRunning = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
+            if gameEvent.type == pygame.KEYDOWN:
+                if gameEvent.key == pygame.K_UP:
                     playerYMove = -0.3
-                if event.key == pygame.K_DOWN:
+                if gameEvent.key == pygame.K_DOWN:
                     playerYMove = 0.3
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_DOWN or event.key == pygame.K_UP:
+            if gameEvent.type == pygame.KEYUP:
+                if gameEvent.key == pygame.K_DOWN or event.key == pygame.K_UP:
                     playerYMove = 0
 
         # Ball movement
@@ -77,17 +78,17 @@ def ping():
         # Opponent ball collision
         if (ballY + 16 >= oppY) and (ballY + 16 <= oppY + 96):
             # Builds the speed when colliding with the Opponent, up to a point
-            if (ballX >= oppX + 10):
-                if ballXMove < 1 and ballXMove > -1:
+            if ballX >= oppX + 10:
+                if 1 > ballXMove > -1:
                     ballXMove = -ballXMove * ballBuildUp
                     ballYMove *= ballBuildUp
                 else:
                     ballXMove = -ballXMove
         # Player ball collision
         if (ballY + 16 >= playerY) and (ballY + 16 <= playerY + 96):
-            if (ballX <= playerX + 55):
+            if ballX <= playerX + 55:
                 # Builds the speed when colliding with the player, up to a point
-                if ballXMove < 1 and ballXMove > -1:
+                if 1 > ballXMove > -1:
                     ballXMove = -ballXMove * ballBuildUp
                     ballYMove *= ballBuildUp
                 else:
@@ -146,7 +147,7 @@ noText = yesNoFont.render("NO", True, (255, 255, 255))
 
 running = True
 while running:
-    # Gets the mouses x and y position
+    # Gets the mouse x and y position
     mousePos = pygame.mouse.get_pos()
 
     # Refreshes the screen to black so updates can be made
